@@ -1,3 +1,5 @@
+#Huge thanks to ALIILAPRO for making the script
+#Modified for Logging and Single line exection by dhlalit11 
 import urllib.request
 import json
 import datetime
@@ -6,7 +8,11 @@ import string
 import time
 import os
 import sys
+import duallog 
+import logging
 os.system("title WARP-PLUS-CLOUDFLARE By ALIILAPRO")
+#Setup save location for log files
+duallog.setup('/path/to/log/folder')
 os.system('cls' if os.name == 'nt' else 'clear')
 print('      _______ _      __________________       _______ _______ _______ _______\n'
 '     (  ___  | \     \__   __|__   __( \     (  ___  |  ____ |  ____ |  ___  )\n'
@@ -24,7 +30,10 @@ print ("[+] THIS SCRIPT CODDED BY ALIILAPRO")
 print ("[-] SITE: aliilapro.github.io") 
 print ("[-] TELEGRAM: aliilapro")
 print ("--------")
-referrer = input("[#] Enter the WARP+ ID:")
+time.sleep(1.5)
+#Change referrer id below to your id or you won't get free data ( dont delete quote marks)
+referrer = 'f0b3ba5f-9dfd-44c6-803b-8839a00ad7c8'
+#
 def genString(stringLength):
 	try:
 		letters = string.ascii_letters + string.digits
@@ -38,6 +47,7 @@ def digitString(stringLength):
 	except Exception as error:
 		print(error)	
 url = f'https://api.cloudflareclient.com/v0a{digitString(3)}/reg'
+#
 def run():
 	try:
 		install_id = genString(22)
@@ -70,24 +80,18 @@ while True:
 	if result == 200:
 		g = g + 1
 		os.system('cls' if os.name == 'nt' else 'clear')
-		print("")
-		print("                  WARP-PLUS-CLOUDFLARE (script)" + " By ALIILAPRO")
-		print("")
-		animation = ["[■□□□□□□□□□] 10%","[■■□□□□□□□□] 20%", "[■■■□□□□□□□] 30%", "[■■■■□□□□□□] 40%", "[■■■■■□□□□□] 50%", "[■■■■■■□□□□] 60%", "[■■■■■■■□□□] 70%", "[■■■■■■■■□□] 80%", "[■■■■■■■■■□] 90%", "[■■■■■■■■■■] 100%"] 
-		for i in range(len(animation)):
-			time.sleep(0.5)
-			sys.stdout.write("\r[+] Preparing... " + animation[i % len(animation)])
-			sys.stdout.flush()
-		print(f"\n[-] WORK ON ID: {referrer}")    
-		print(f"[:)] {g} GB has been successfully added to your account.")
-		print(f"[#] Total: {g} Good {b} Bad")
-		print("[*] After 18 seconds, a new request will be sent.")
-		time.sleep(18)
+		logging.critical("WARP-PLUS-CLOUDFLARE (script)" + " By ALIILAPRO")
+		print("[+] Preparing")
+		time.sleep(0.4)
+		logging.critical(f"[-] WORK ON ID: {referrer}")    
+		logging.critical(f"[:)] {g} GB has been successfully added to your account.")
+		logging.critical(f"[#] Total: {g} Good {b} Bad")
+		logging.critical("[*] After 30 seconds, a new request will be sent.\n\n")
+		time.sleep(30)
 	else:
 		b = b + 1
 		os.system('cls' if os.name == 'nt' else 'clear')
-		print("")
-		print("                  WARP-PLUS-CLOUDFLARE (script)" + " By ALIILAPRO")
-		print("")
-		print("[:(] Error when connecting to server.")
-		print(f"[#] Total: {g} Good {b} Bad")	
+		logging.error(" WARP-PLUS-CLOUDFLARE (script)" + " By ALIILAPRO")
+		logging.error("[:(] Error when connecting to server.")
+		logging.error(f"[#] Total: {g} Good {b} Bad\n\n")	
+		sys.stdout.flush()
