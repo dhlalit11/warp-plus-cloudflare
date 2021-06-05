@@ -39,13 +39,13 @@ def genString(stringLength):
 		letters = string.ascii_letters + string.digits
 		return ''.join(random.choice(letters) for i in range(stringLength))
 	except Exception as error:
-		print(error)		    
+		logging.error(f"error\n\n")		    
 def digitString(stringLength):
 	try:
 		digit = string.digits
 		return ''.join((random.choice(digit) for i in range(stringLength)))    
 	except Exception as error:
-		print(error)	
+		logging.error(f"error\n\n")
 url = f'https://api.cloudflareclient.com/v0a{digitString(3)}/reg'
 #
 def run():
@@ -75,6 +75,7 @@ def run():
 
 g = 0
 b = 0
+e = 0
 while True:
 	result = run()
 	if result == 200:
@@ -87,9 +88,18 @@ while True:
 		logging.critical(f"[:)] {g} GB has been successfully added to your account.")
 		logging.critical(f"[#] Total: {g} Good {b} Bad")
 		logging.critical("[*] After 30 seconds, a new request will be sent.\n\n")
+		e = 0
 		time.sleep(30)
+	elif e > 9:
+		b = b + 1
+		e = e + 1
+		os.system('cls' if os.name == 'nt' else 'clear')
+		logging.error(f"Got back to back {e} errors, waiting 15 seconds before sending another request")
+		logging.error(f"Total number of bad requests are {b}\n\n")
+		time.sleep(15)
 	else:
 		b = b + 1
+		e = e + 1
 		os.system('cls' if os.name == 'nt' else 'clear')
 		logging.error(" WARP-PLUS-CLOUDFLARE (script)" + " By ALIILAPRO")
 		logging.error("[:(] Error when connecting to server.")
